@@ -1,23 +1,18 @@
 // SPDX-License-Identifier: unlicensed
 pragma solidity ^0.8.4;
 
-import "./dependences/ERC20Upgradeable.sol";
-import "./dependences/ERC20BurnableUpgradeable.sol";
-import "./dependences/OwnableUpgradeable.sol";
-import "./dependences/Initializable.sol";
+import "./dependences/ERC20.sol";
+import "./dependences/ERC20distributor.sol";
+import "./dependences/Ownable.sol";
 
-contract ubi is Initializable, ERC20Upgradeable, ERC20BurnableUpgradeable, OwnableUpgradeable {
-    constructor() {
-        _disableInitializers();
+contract ubi is ERC20, ERC20distributor {
+    constructor() ERC20("Ubi", "ubi"){
     }
 
-    function initialize() initializer public {
-        __ERC20_init("Ubi", "ubi");
-        __ERC20Burnable_init();
-        __Ownable_init();
+    function burn(uint256 amount) public{
+        _burn(_msgSender(), amount);
     }
-
-    function mint(address to, uint256 amount) public onlyOwner {
+    function mint(address to, uint256 amount) internal {
         _mint(to, amount);
     }
 }
