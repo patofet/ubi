@@ -41,6 +41,25 @@
 					{
 						"indexed": true,
 						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
 						"name": "from",
 						"type": "address"
 					},
@@ -222,6 +241,26 @@
 				"type": "function"
 			},
 			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -230,6 +269,19 @@
 					}
 				],
 				"name": "setActiveUsers",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "setUserAndClaim",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -325,6 +377,19 @@
 				],
 				"stateMutability": "nonpayable",
 				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			}
 		],
 		"devdoc": {
@@ -351,6 +416,12 @@
 				"name()": {
 					"details": "Returns the name of the token."
 				},
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+				},
 				"symbol()": {
 					"details": "Returns the symbol of the token, usually a shorter version of the name."
 				},
@@ -362,6 +433,9 @@
 				},
 				"transferFrom(address,address,uint256)": {
 					"details": "See {IERC20-transferFrom}. Emits an {Approval} event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of {ERC20}. NOTE: Does not update the allowance if the current allowance is the maximum `uint256`. Requirements: - `from` and `to` cannot be the zero address. - `from` must have a balance of at least `amount`. - the caller must have allowance for ``from``'s tokens of at least `amount`."
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
 				}
 			},
 			"version": 1
@@ -405,11 +479,11 @@
 			]
 		},
 		"contracts/dependences/ERC20distributor.sol": {
-			"keccak256": "0x3c33bad372c8f59b16db7c7f15c13f1658e317bd18f6f6cd9c2c6f4a0bcab11e",
+			"keccak256": "0xd8ce18455eedd474d9e3e0febb6b6112cf6ff75931ddb32b78bacf1eeaf6c957",
 			"license": "unlicensed",
 			"urls": [
-				"bzz-raw://6627ba7d0e06f8cb399fe52a83b8800b98d4f454c20f12fb0c6639d21327970b",
-				"dweb:/ipfs/QmVChWETUuFgB9F1wucJvr1TpYuYQNkdyvXVX1vqAAg3t3"
+				"bzz-raw://f472c96183c38759743dec5a2d54e88ec5a4e9dcfa9b3cb1b5a8f1b78a51ba85",
+				"dweb:/ipfs/QmXQo93v1Yyrky6JWszHqWXdRmnghxb6qKsJGGEArzQ4Ko"
 			]
 		},
 		"contracts/dependences/IERC20.sol": {
@@ -437,11 +511,11 @@
 			]
 		},
 		"contracts/ubi.sol": {
-			"keccak256": "0xea510643ea8290f9eb62feb7decc4e716011cfe297b26db50320306e8a13d24b",
+			"keccak256": "0xdd46179542d606847f5422751443dd8929aeac2f7ec83755d2c29e8423b2fd4c",
 			"license": "unlicensed",
 			"urls": [
-				"bzz-raw://253c6bc0d602f85f1da6921d606267d3c15d61ac9b00cfa655d6736fdd7be2af",
-				"dweb:/ipfs/QmcqUvvj3m24qQwyJZBXGGNe1Ur6BR8kt9jp5AM2NoSnGB"
+				"bzz-raw://9ae81017da10518ef81e79e7881c580e356cefb41b0c3ba2054060cd3e365c9b",
+				"dweb:/ipfs/QmQshhnz7K6bUNtmiSdKwvwTHSEv7sFV7kVE2L3JGojVzg"
 			]
 		}
 	},

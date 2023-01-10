@@ -3,8 +3,9 @@ pragma solidity ^0.8.0;
 
 import "./ERC20.sol";
 import "./Context.sol";
+import "./Ownable.sol";
 
-abstract contract ERC20distributor is Context, ERC20 {
+abstract contract ERC20distributor is Context, ERC20, Ownable {
     uint256 private lastTimeReedem;
     uint256 private constant oneMonthSeconds = 2630000;
     uint256 public totalUsers;
@@ -14,10 +15,15 @@ abstract contract ERC20distributor is Context, ERC20 {
         totalUsers = amount;
     }
 
-    function claim() public virtual{
+    function claim() public virtual {
         require(lastTimeReedem - block.timestamp >= oneMonthSeconds, "claim: not enough time has passed");
         uint256 amountToMint = totalUsers;
         _mint(_msgSender(), amountToMint);
         lastTimeReedem = block.timestamp;
+    }
+
+    function setUserAndClaim(uint256 amount) public onlyOwner{
+        setActiveUsers(amount);
+        claim();
     }
 }
