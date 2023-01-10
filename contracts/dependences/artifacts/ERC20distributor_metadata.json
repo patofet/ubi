@@ -6,11 +6,6 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
-				"stateMutability": "nonpayable",
-				"type": "constructor"
-			},
-			{
 				"anonymous": false,
 				"inputs": [
 					{
@@ -144,19 +139,6 @@
 					}
 				],
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "amount",
-						"type": "uint256"
-					}
-				],
-				"name": "burn",
-				"outputs": [],
-				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -461,7 +443,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/ubi.sol": "ubi"
+			"contracts/dependences/ERC20distributor.sol": "ERC20distributor"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -521,14 +503,6 @@
 			"urls": [
 				"bzz-raw://82202cee4abe4b0f4b9a9b7ec32b4cac6e4c60bca89a4aa3480a946f26f314a1",
 				"dweb:/ipfs/QmVmZ2H1zvvzQGNZZxHXjznCj9aQnuVizNH85aixAw4fg3"
-			]
-		},
-		"contracts/ubi.sol": {
-			"keccak256": "0xdd46179542d606847f5422751443dd8929aeac2f7ec83755d2c29e8423b2fd4c",
-			"license": "unlicensed",
-			"urls": [
-				"bzz-raw://9ae81017da10518ef81e79e7881c580e356cefb41b0c3ba2054060cd3e365c9b",
-				"dweb:/ipfs/QmQshhnz7K6bUNtmiSdKwvwTHSEv7sFV7kVE2L3JGojVzg"
 			]
 		}
 	},

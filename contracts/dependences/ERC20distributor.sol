@@ -6,8 +6,11 @@ import "./Context.sol";
 import "./Ownable.sol";
 
 abstract contract ERC20distributor is Context, ERC20, Ownable {
-    uint256 private lastTimeReedem;
-    uint256 private constant oneMonthSeconds = 2630000;
+    // Constants
+    uint128 private constant oneMonthSeconds = 2505600;
+    uint128 private constant amountPerUser = 1729;
+    
+    uint256 public lastTimeReedem;
     uint256 public totalUsers;
 
     function setActiveUsers(uint256 amount) public virtual {
@@ -16,8 +19,8 @@ abstract contract ERC20distributor is Context, ERC20, Ownable {
     }
 
     function claim() public virtual {
-        require(lastTimeReedem - block.timestamp >= oneMonthSeconds, "claim: not enough time has passed");
-        uint256 amountToMint = totalUsers;
+        require(block.timestamp - lastTimeReedem >= oneMonthSeconds, "claim: not enough time has passed");
+        uint256 amountToMint = totalUsers * amountPerUser;
         _mint(_msgSender(), amountToMint);
         lastTimeReedem = block.timestamp;
     }
