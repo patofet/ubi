@@ -1,7 +1,6 @@
 
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
-const web3 = require("web3")
 
 describe("ubi", function () {
   const MONTH = 1000 * 60 * 60 * 24 * 60
@@ -19,7 +18,22 @@ describe("ubi", function () {
     await ubi.setUserAndClaim("10");
     expect((await ubi.balanceOf(owner.address)).toNumber()).to.equal(17290);
   });
-  it("Test claim two times", async function () {
+  it("Test claim two times in the same month", async function () {
+    const [owner] = await ethers.getSigners();
+    const Ubi = await ethers.getContractFactory("ubi");
+    const ubi = await Ubi.deploy();
+    await ubi.deployed();
+    await ubi.setUserAndClaim("10");
+    expect((await ubi.balanceOf(owner.address)).toNumber()).to.equal(17290);
+    
+    //await ethers.provider.send('evm_increaseTime', [MONTH])
+    try {
+      await ubi.setUserAndClaim("10");
+    } catch(e){
+      expect(e.reason.indexOf("claim: not enough time has passed")).to.not.equal(-1)
+    }
+  });
+  it("Test claim two times in the next month", async function () {
     const [owner] = await ethers.getSigners();
     const Ubi = await ethers.getContractFactory("ubi");
     const ubi = await Ubi.deploy();
@@ -28,7 +42,9 @@ describe("ubi", function () {
     expect((await ubi.balanceOf(owner.address)).toNumber()).to.equal(17290);
     
     await ethers.provider.send('evm_increaseTime', [MONTH])
-
+    
     await ubi.setUserAndClaim("10");
+      
+    expect((await ubi.balanceOf(owner.address)).toNumber()).to.equal(17290 * 2);
   });
 });
