@@ -26,7 +26,6 @@ describe("ubi", function () {
     await ubi.setUserAndClaim("10");
     expect((await ubi.balanceOf(owner.address)).toNumber()).to.equal(17290);
     
-    //await ethers.provider.send('evm_increaseTime', [MONTH])
     try {
       await ubi.setUserAndClaim("10");
     } catch(e){

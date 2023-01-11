@@ -5,7 +5,7 @@ import "./ERC20.sol";
 import "./Context.sol";
 import "./Ownable.sol";
 
-abstract contract ERC20distributor is Context, ERC20, Ownable {
+abstract contract ERC20Distributor is Context, ERC20, Ownable {
     // Constants
     uint128 private constant oneMonthSeconds = 2505600;
     uint128 private constant amountPerUser = 1729;
