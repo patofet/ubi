@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: unlicensed
 pragma solidity 0.8.17;
 
+import "./IERC721ALockedTokens.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.7.0/contracts/access/Ownable.sol";
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.7.0/contracts/utils/Context.sol";
 import "https://github.com/chiru-labs/ERC721A/blob/v4.1.0/contracts/ERC721A.sol";
 
-contract ERC721ALockedTokens is Context, ERC721A, Ownable {
+contract ERC721ALockedTokens is IERC721ALockedTokens, Context, ERC721A, Ownable {
 
     uint256 public unlockedTokens;
     uint256 public maxSupply;
@@ -21,15 +22,15 @@ contract ERC721ALockedTokens is Context, ERC721A, Ownable {
         _;
     }
 
-    constructor(string memory _name, string memory _symbol, string memory _baseUri, uint256 _maxSupply, address _minter) ERC721A(_name, _symbol) {
+    constructor(string memory _name, string memory _symbol, string memory _baseUri, uint256 _maxSupply, address _minter, address _owner) ERC721A(_name, _symbol) {
         baseURI = _baseUri;
         maxSupply = _maxSupply;
         minter = _minter;
 
-        _transferOwnership(_msgSender());
+        _transferOwnership(_owner);
     }
 
-    function mintTo(address _to, uint256 _mintAmount) public onlyMinter {
+    function mintTo(address _to, uint256 _mintAmount) public override onlyMinter {
         require(isMintable(_mintAmount), "mintTo: exceed the max Supply!");
 
         _mintLoop(_to, _mintAmount);
@@ -48,7 +49,7 @@ contract ERC721ALockedTokens is Context, ERC721A, Ownable {
         }
     }
 
-    function isMintable(uint256 _mintAmount) public view returns(bool) {
+    function isMintable(uint256 _mintAmount) public override view returns(bool) {
         return maxSupply >= totalSupply() + _mintAmount;
     }
 

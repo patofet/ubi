@@ -31,6 +31,11 @@
 						"internalType": "address",
 						"name": "_minter",
 						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
 					}
 				],
 				"stateMutability": "nonpayable",
@@ -361,7 +366,13 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_mintAmount",
+						"type": "uint256"
+					}
+				],
 				"name": "isMintable",
 				"outputs": [
 					{
@@ -863,11 +874,19 @@
 	},
 	"sources": {
 		"contracts/dependencies/ERC721ALockedTokens.sol": {
-			"keccak256": "0xbc9a9e83f5e3ff10670ba42c33dd544ec7db53c83944f6e3da9427532917ca39",
+			"keccak256": "0xed2d1a59b09738cd9ce1d4294f560bae1f88e64a5d68051a643a295171476a04",
 			"license": "unlicensed",
 			"urls": [
-				"bzz-raw://f771e3ab0c75d72b482e052fa4a3f42e2c9e5dcc9a46641d022690269bf822e6",
-				"dweb:/ipfs/QmRJAANMGAZSuN9LCxM5FUd1bXauCAjdxVSRFNQfu7j17e"
+				"bzz-raw://abd231fa32c6c5a7551d260e694e5d3681a0faa3572a12608df6ec866e398c7f",
+				"dweb:/ipfs/QmeTWLKSSFZZZKPexnKigLuDunxLuXLN7FFLqdtKVxKN7D"
+			]
+		},
+		"contracts/dependencies/IERC721ALockedTokens.sol": {
+			"keccak256": "0x7c052e752b9500d9f3af2f835625ccbca7aa0994c7e90151efe1e76a0b344788",
+			"license": "unlicensed",
+			"urls": [
+				"bzz-raw://9e60100d4af2bb3c9d0abf7fa506eccc6b8274a5f951fefab64b7152e925fe65",
+				"dweb:/ipfs/QmTMLWFmFATS33fr5r5TAETYL4dTE25dsDGs1YUwhbQEpW"
 			]
 		},
 		"https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.7.0/contracts/access/Ownable.sol": {
