@@ -2,9 +2,9 @@
 pragma solidity ^0.8.4;
 
 import "./dependencies/ERC20.sol";
-import "./dependencies/ERC20Distributor.sol";
+import "./dependencies/ERC20UserDistributor.sol";
 
-contract ubi is ERC20, ERC20Distributor {
+contract ubiUser is ERC20, ERC20UserDistributor {
     constructor() ERC20("Ubi", "ubi"){
     }
 
