@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: unlicensed
 pragma solidity ^0.8.4;
 
-import "./dependencies/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import "./dependencies/ERC20UserDistributor.sol";
 
 contract ubiUser is ERC20, ERC20UserDistributor {

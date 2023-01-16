@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: unlicensed
 pragma solidity 0.8.17;
 
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/Context.sol";
 import "./IERC721ALockedTokens.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.7.0/contracts/access/Ownable.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/v4.7.0/contracts/utils/Context.sol";
-import "https://github.com/chiru-labs/ERC721A/blob/v4.1.0/contracts/ERC721A.sol";
+import "erc721a/contracts/ERC721A.sol";
 
 contract ERC721ALockedTokens is IERC721ALockedTokens, Context, ERC721A, Ownable {
 
@@ -61,7 +61,7 @@ contract ERC721ALockedTokens is IERC721ALockedTokens, Context, ERC721A, Ownable 
         address from,
         address to,
         uint256 tokenId
-    ) public virtual override {
+    ) public payable virtual override {
         require(tokenId < unlockedTokens, "transferFrom: token still not transferable");
         super.transferFrom(from, to, tokenId);
     }
