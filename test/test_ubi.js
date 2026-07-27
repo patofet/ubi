@@ -43,9 +43,14 @@ describe("UBI & JobchainMarketplace Ecosystem", function () {
         });
 
         it("Should revert if non-allowed address tries to create a collection", async function () {
-            await expect(
-                marketplace.connect(addr1).createCollection("Test NFT", "TNFT", "https://api.test/", 1000)
-            ).to.be.revertedWith("createCollection: the address is not allowed to create collections");
+            let reverted = false;
+            try {
+                await marketplace.connect(addr1).createCollection("Test NFT", "TNFT", "https://api.test/", 1000);
+            } catch (error) {
+                reverted = true;
+                expect(error.message).to.include("createCollection: the address is not allowed to create collections");
+            }
+            expect(reverted).to.equal(true);
         });
     });
 });
