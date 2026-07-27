@@ -1,0 +1,51 @@
+const { expect } = require("chai");
+const { ethers } = require("hardhat");
+
+describe("UBI & JobchainMarketplace Ecosystem", function () {
+    let UBI, ubiToken;
+    let JobchainMarketplace, marketplace;
+    let owner, addr1, addr2;
+
+    beforeEach(async function () {
+        [owner, addr1, addr2] = await ethers.getSigners();
+
+        // 1. Deploy UBI Token
+        UBI = await ethers.getContractFactory("UBI");
+        ubiToken = await UBI.deploy();
+        await ubiToken.deployed();
+
+        // 2. Deploy JobchainMarketplace
+        JobchainMarketplace = await ethers.getContractFactory("JobchainMarketplace");
+        marketplace = await JobchainMarketplace.deploy(ubiToken.address);
+        await marketplace.deployed();
+    });
+
+    describe("UBI Token Deployment", function () {
+        it("Should deploy with correct name and symbol", async function () {
+            expect(await ubiToken.name()).to.equal("UBI");
+            expect(await ubiToken.symbol()).to.equal("UBI");
+        });
+    });
+
+    describe("Marketplace Configuration & Permissions", function () {
+        it("Should set the deployer as the initial owner", async function () {
+            expect(await marketplace.owner()).to.equal(owner.address);
+        });
+
+        it("Should allow owner to toggle creator permissions", async function () {
+            expect(await marketplace.isAllowedToCreate(addr1.address)).to.equal(false);
+            
+            await marketplace.toggleCreators([addr1.address]);
+            expect(await marketplace.isAllowedToCreate(addr1.address)).to.equal(true);
+
+            await marketplace.toggleCreators([addr1.address]);
+            expect(await marketplace.isAllowedToCreate(addr1.address)).to.equal(false);
+        });
+
+        it("Should revert if non-allowed address tries to create a collection", async function () {
+            await expect(
+                marketplace.connect(addr1).createCollection("Test NFT", "TNFT", "https://api.test/", 1000)
+            ).to.be.revertedWith("createCollection: the address is not allowed to create collections");
+        });
+    });
+});

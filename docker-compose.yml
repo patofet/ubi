@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  hardhat-test:
+    build: .
+    container_name: ubi-hardhat-test
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npx hardhat test --network hardhat
+
+  hardhat-compile:
+    build: .
+    container_name: ubi-hardhat-compile
+    volumes:
+      - .:/app
+      - /app/node_modules
+    command: npx hardhat compile
