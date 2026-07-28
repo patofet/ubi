@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/utils/Context.sol";
 import "./dependencies/ERC721ALockedTokens.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-contract JobchainMarketplace is Context, Ownable {
+contract UBIMarketplace is Context, Ownable {
 
     mapping(address => bool) public isCollection;
     mapping(address => bool) public isAllowedToCreate;

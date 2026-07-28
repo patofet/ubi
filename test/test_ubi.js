@@ -1,9 +1,9 @@
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
 
-describe("UBI & JobchainMarketplace Ecosystem", function () {
+describe("UBI & UBIMarketplace Ecosystem", function () {
     let UBI, ubiToken;
-    let JobchainMarketplace, marketplace;
+    let UBIMarketplace, marketplace;
     let owner, addr1, addr2;
 
     beforeEach(async function () {
@@ -14,9 +14,9 @@ describe("UBI & JobchainMarketplace Ecosystem", function () {
         ubiToken = await UBI.deploy();
         await ubiToken.deployed();
 
-        // 2. Deploy JobchainMarketplace
-        JobchainMarketplace = await ethers.getContractFactory("JobchainMarketplace");
-        marketplace = await JobchainMarketplace.deploy(ubiToken.address);
+        // 2. Deploy UBIMarketplace
+        UBIMarketplace = await ethers.getContractFactory("UBIMarketplace");
+        marketplace = await UBIMarketplace.deploy(ubiToken.address);
         await marketplace.deployed();
     });
 
